@@ -6,7 +6,11 @@ from .models import User, Team, Activity, Leaderboard, Workout
 
 @api_view(['GET', 'POST'])
 def api_root(request, format=None):
-    base_url = 'http://localhost:8000/'
+    # Dynamically set the base URL for API endpoints
+    host = request.get_host()
+    scheme = 'https' if 'app.github.dev' in host else 'http'
+    base_url = f"{scheme}://{host}/"
+    # Note: For Codespaces, ignore HTTPS certificate warnings in curl with -k
     return Response({
         'users': base_url + 'api/users/?format=api',
         'teams': base_url + 'api/teams/?format=api',
