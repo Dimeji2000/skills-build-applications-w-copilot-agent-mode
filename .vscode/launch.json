@@ -5,7 +5,7 @@
 
     {
       "name": "Launch Django Backend",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/octofit-tracker/backend/manage.py",
       "args": ["runserver", "0.0.0.0:8000"],
@@ -21,11 +21,10 @@
       "name": "Launch React Frontend",
       "type": "node",
       "request": "launch",
-      "program": "${skills-build-applications-w-copilot-agent-mode}/octofit-tracker/frontend/node_modules/react-scripts/scripts/start.js",
-      "cwd": "${skills-build-applications-w-copilot-agent-mode}/octofit-tracker/frontend",
+      "program": "${workspaceFolder}/octofit-tracker/frontend/node_modules/react-scripts/scripts/start.js",
+      "cwd": "${workspaceFolder}/octofit-tracker/frontend",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["start"],
-      "port": 3000
+      "runtimeArgs": ["start"]
     }
   ]
 }

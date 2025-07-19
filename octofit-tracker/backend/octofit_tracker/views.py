@@ -1,3 +1,6 @@
+
+CODESPACE_API_SUFFIX = '/api/'
+
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -6,17 +9,15 @@ from .models import User, Team, Activity, Leaderboard, Workout
 
 @api_view(['GET', 'POST'])
 def api_root(request, format=None):
-    # Dynamically set the base URL for API endpoints
-    host = request.get_host()
-    scheme = 'https' if 'app.github.dev' in host else 'http'
-    base_url = f"{scheme}://{host}/"
+    # Always use the Codespace URL for API endpoints
+    codespace_url = 'https://organic-fishstick-jvwj9679v5jc5jvw-8000.app.github.dev/'
     # Note: For Codespaces, ignore HTTPS certificate warnings in curl with -k
     return Response({
-        'users': base_url + 'api/users/?format=api',
-        'teams': base_url + 'api/teams/?format=api',
-        'activities': base_url + 'api/activities/?format=api',
-        'leaderboard': base_url + 'api/leaderboard/?format=api',
-        'workouts': base_url + 'api/workouts/?format=api'
+        'users': codespace_url + 'api/users/?format=api',
+        'teams': codespace_url + 'api/teams/?format=api',
+        'activities': codespace_url + 'api/activities/?format=api',
+        'leaderboard': codespace_url + 'api/leaderboard/?format=api',
+        'workouts': codespace_url + 'api/workouts/?format=api'
     })
 
 class UserViewSet(viewsets.ModelViewSet):

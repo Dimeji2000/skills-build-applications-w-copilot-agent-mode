@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Run Django Server (OctoFit)",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/octofit-tracker/backend/manage.py",
             "args": [
