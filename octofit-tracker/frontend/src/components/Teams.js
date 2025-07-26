@@ -9,6 +9,19 @@ function Teams() {
       .then(data => setTeams(data));
   }, []);
 
+  const [show, setShow] = useState(false);
+  const [newTeam, setNewTeam] = useState("");
+
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTeams([...teams, { id: Date.now(), name: newTeam }]);
+    setNewTeam("");
+    handleClose();
+  };
+
   return (
     <div className="card mt-4">
       <div className="card-body">
@@ -27,7 +40,26 @@ function Teams() {
             ))}
           </tbody>
         </table>
-        <button className="btn btn-warning">Add Team</button>
+        <button className="btn btn-warning" onClick={handleShow}>Add Team</button>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Team</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="formTeamName">
+                <Form.Label>Team Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={newTeam}
+                  onChange={e => setNewTeam(e.target.value)}
+                  required
+                />
+              </Form.Group>
+              <Button variant="warning" type="submit">Add</Button>
+            </Form>
+          </Modal.Body>
+        </Modal>
       </div>
     </div>
   );
